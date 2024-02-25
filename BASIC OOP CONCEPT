@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class
+class Animal {
+protected:
+    string name;
+    int age;
+
+public:
+    Animal(string _name, int _age) : name(_name), age(_age) {}
+
+    void setName(string _name) {
+        name = _name;
+    }
+
+    void setAge(int _age) {
+        age = _age;
+    }
+
+    string getName() const {
+        return name;
+    }
+
+    int getAge() const {
+        return age;
+    }
+
+    virtual void makeSound() const = 0; // pure virtual function
+};
+
+// Derived class
+class Dog : public Animal {
+public:
+    Dog(string _name, int _age) : Animal(_name, _age) {}
+
+    void makeSound() const override {
+        cout << getName() << " says Woof!" << endl;
+    }
+};
+
+// Derived class
+class Cat : public Animal {
+public:
+    Cat(string _name, int _age) : Animal(_name, _age) {}
+
+    void makeSound() const override {
+        cout << getName() << " says Meow!" << endl;
+    }
+};
+
+int main() {
+    Dog dog("Buddy", 5);
+    Cat cat("Whiskers", 3);
+
+    cout << "Dog: " << dog.getName() << ", Age: " << dog.getAge() << endl;
+    dog.makeSound();
+
+    cout << "Cat: " << cat.getName() << ", Age: " << cat.getAge() << endl;
+    cat.makeSound();
+
+    return 0;
+}
